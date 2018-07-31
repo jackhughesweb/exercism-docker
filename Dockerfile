@@ -6,8 +6,8 @@ WORKDIR /opt/rails
 # Copy project to container
 COPY website/ .
 
-# Set identity file
-RUN echo "host" > server_identity
+COPY setup/rails/entrypoint.sh /usr/bin/entrypoint
+RUN chmod +x /usr/bin/entrypoint
 
 # Setup this environment to development
 ENV RAILS_ENV "development"
@@ -31,4 +31,4 @@ RUN bundle exec rake bin/setup
 EXPOSE 3000
 
 # Run the development server
-CMD ["bin/rails", "server"]
+ENTRYPOINT ["entrypoint"]

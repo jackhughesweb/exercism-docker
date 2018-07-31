@@ -2,6 +2,8 @@ version: '3'
 services:
   redis:
     image: "redis:4"
+    networks:
+      - internal
   mysql:
     environment:
       - MYSQL_ALLOW_EMPTY_PASSWORD=1
@@ -14,11 +16,10 @@ services:
       - "--collation-server=utf8mb4_unicode_ci"
     volumes:
       - ./setup/mysql:/docker-entrypoint-initdb.d
+    networks:
+      - internal
   rails:
-# Use the prebuilt image
-    image: "unused/exercism_rails"
-# Build your own image
-#   build: .
+    build: .
     volumes:
       - ./website/:/opt/rails
     environment:
@@ -29,3 +30,13 @@ services:
       - redis
     ports:
       - "3000:3000/tcp"
+    networks:
+      internal:
+      external:
+        aliases:
+          - teams.exercism.local
+          - exercism.local
+
+networks:
+  internal:
+  external:
