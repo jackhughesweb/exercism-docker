@@ -6,7 +6,7 @@ website:
 website/server_identity: website
 	echo "exercism.local" > website/server_identity
 
-init:
+setup_db:
 	docker-compose -p exercism exec rails bin/rails exercism:setup
 
 migrate:
@@ -16,6 +16,7 @@ update_repos:
 	docker-compose -p exercism exec rails bin/rails git:update_repos
 
 update: migrate update_repos
+init: setup_db update
 
 run:
 	docker-compose -p exercism up
@@ -32,4 +33,4 @@ stop:
 clean:
 	docker-compose -p exercism down && docker rmi exercism_rails
 
-.PHONY: all init migrate update_repos update run console test stop clean
+.PHONY: all setup_db migrate update_repos update init run console test stop clean

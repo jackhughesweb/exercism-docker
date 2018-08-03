@@ -5,22 +5,23 @@ docker-compose. Adapted from [unused/exercism-docker](https://github.com/unused/
 
 TL;DR
 
+First run:
 ```
 $ git clone https://github.com/jackhughesweb/exercism-docker.git # Download this repo
 $ cd exercism-docker # Change directory
 $ make # Builds and starts the server
-$ make init # One-time initialization run while the server is up (database migration and seed)
+$ make init # One-time initialization run while the server is up (database migration and seed) - run in a new shell while the server is up
 ```
 
-Then run using:
+Future runs:
 ```
-$ make
+$ make # starts the server
 ```
 
-Other useful commands:
+Other useful commands (these should be run in a new shell while the server is up):
 ```
 $ make migrate # perform rake db:migrate
-$ make update # performs rake db:migrate and syncs Git repos
+$ make update # performs rake db:migrate and sync Git repos (will run during `make init`)
 $ make console # attaches to the rails server and opens a shell
 $ make stop # stops server
 ```

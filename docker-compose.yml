@@ -16,6 +16,7 @@ services:
       - "--collation-server=utf8mb4_unicode_ci"
     volumes:
       - ./setup/mysql:/docker-entrypoint-initdb.d
+      - exercism-dev-mysql:/var/lib/mysql
     networks:
       - internal
   rails:
@@ -40,3 +41,6 @@ services:
 networks:
   internal:
   external:
+
+volumes:
+  exercism-dev-mysql:
