@@ -23,6 +23,7 @@ Other useful commands (these should be run in a new shell while the server is up
 $ make migrate # perform rake db:migrate
 $ make update # performs rake db:migrate and sync Git repos (will run during `make init`)
 $ make console # attaches to the rails server and opens a shell
+$ make test # runs rake test
 $ make stop # stops server
 ```
 

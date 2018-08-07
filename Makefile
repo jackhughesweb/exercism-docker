@@ -25,7 +25,7 @@ console:
 	docker-compose -p exercism exec rails sh
 
 test:
-	docker-compose -p exercism exec rails bin/rails test
+	docker-compose -p exercism exec rails bin/rails test RAILS_ENV=test
 
 stop:
 	docker-compose -p exercism stop
