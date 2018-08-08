@@ -1,5 +1,14 @@
 version: '3'
 services:
+  selenium:
+    image: selenium/standalone-chrome:3.14
+    container_name: selenium
+    volumes:
+      - ./website/:/opt/rails
+    ports:
+      - "4444:4444"
+    networks:
+      - internal
   redis:
     image: "redis:4"
     networks:
@@ -26,13 +35,19 @@ services:
     environment:
       MYSQL_HOST: 'mysql'
       REDIS_URL: 'redis://redis:6379/1'
+      TESTS_TEAMS_HOST: 'http://teams.exercism.local'
     depends_on:
       - mysql
       - redis
+      - selenium
     ports:
       - "3000:3000/tcp"
+      - "3010:3010/tcp"
     networks:
       internal:
+        aliases:
+          - teams.exercism.local
+          - exercism.local
       external:
         aliases:
           - teams.exercism.local

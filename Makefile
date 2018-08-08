@@ -25,7 +25,11 @@ console:
 	docker-compose -p exercism exec rails sh
 
 test:
+	docker-compose -p exercism exec rails bundle exec rake db:drop RAILS_ENV=test || true
+	docker-compose -p exercism exec rails bundle exec rake db:create RAILS_ENV=test
+	docker-compose -p exercism exec rails bundle exec rake db:test:prepare RAILS_ENV=test
 	docker-compose -p exercism exec rails bin/rails test RAILS_ENV=test
+	docker-compose -p exercism exec rails bin/rails test:system RAILS_ENV=test
 
 stop:
 	docker-compose -p exercism stop
