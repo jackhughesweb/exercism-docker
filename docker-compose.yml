@@ -35,7 +35,9 @@ services:
     environment:
       MYSQL_HOST: 'mysql'
       REDIS_URL: 'redis://redis:6379/1'
-      TESTS_TEAMS_HOST: 'http://teams.exercism.local'
+      TESTS_DEFAULT_HOST: 'exercism.local'
+      TESTS_TEAMS_HOST: 'teams.exercism.local'
+      TESTS_SELENIUM_HUB_URL: 'http://selenium:4444/wd/hub'
     depends_on:
       - mysql
       - redis
