@@ -1,7 +1,11 @@
-all: website website/server_identity run
+all: website website-copy website/server_identity run
+production: website website-copy website/server_identity run_production
 
 website:
 	git clone --origin upstream --branch master https://github.com/exercism/website.git
+
+website-copy:
+	git clone --origin upstream --branch master https://github.com/exercism/website-copy.git
 
 website/server_identity: website
 	echo "exercism.local" > website/server_identity
@@ -14,12 +18,16 @@ migrate:
 
 update_repos:
 	docker-compose -p exercism exec rails bin/rails git:update_repos
+	( cd website-copy && git pull upstream master )
 
 update: migrate update_repos
 init: setup_db update
 
 run:
 	docker-compose -p exercism up
+
+run_production:
+	docker-compose -f docker-compose.yml -f production.yml -p exercism up -d
 
 console:
 	docker-compose -p exercism exec rails sh
@@ -37,4 +45,4 @@ stop:
 clean:
 	docker-compose -p exercism down && docker rmi exercism_rails
 
-.PHONY: all setup_db migrate update_repos update init run console test stop clean
+.PHONY: all production setup_db migrate update_repos update init run run_production console test stop clean
