@@ -15,8 +15,6 @@ website/server_identity: website
 
 setup_db:
 	docker-compose -p exercism exec rails bin/rails exercism:setup
-	docker-compose -p exercism exec rails bin/rails db:schema:load
-	docker-compose -p exercism exec rails bin/rails db:seed
 
 migrate:
 	docker-compose -p exercism exec rails bin/rails db:migrate
