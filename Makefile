@@ -38,6 +38,9 @@ run_production:
 console:
 	docker-compose -p exercism exec rails sh
 
+log_development:
+	docker-compose -p exercism exec rails tail -f log/development.log
+
 test:
 	docker-compose -p exercism exec rails bundle exec rake db:drop RAILS_ENV=test || true
 	docker-compose -p exercism exec rails bundle exec rake db:create RAILS_ENV=test
@@ -51,4 +54,4 @@ stop:
 clean:
 	docker-compose -p exercism down && docker rmi exercism_rails
 
-.PHONY: all detatched detatched_init production_init setup_db migrate update_repos update init run run_detatched run_production console test stop clean
+.PHONY: all detatched detatched_init production_init setup_db migrate update_repos update init run run_detatched run_production console log_development test stop clean
