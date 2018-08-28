@@ -1,6 +1,6 @@
 all: website website-copy website/server_identity run
-detatched: website website-copy website/server_identity run_detatched
-detatched_init: website website-copy website/server_identity run_detatched init
+detached: website website-copy website/server_identity run_detached
+detached_init: website website-copy website/server_identity run_detached init
 production: website website-copy website/server_identity run_production
 production_init: website website-copy website/server_identity run_production init
 
@@ -29,8 +29,8 @@ init: setup_db update
 run:
 	docker-compose -p exercism up
 
-run_detatched:
-	docker-compose -f docker-compose.yml -f production.yml -p exercism up -d
+run_detached:
+	docker-compose -p exercism up -d
 
 run_production:
 	docker-compose -f docker-compose.yml -f production.yml -p exercism up -d
@@ -54,4 +54,4 @@ stop:
 clean:
 	docker-compose -p exercism down && docker rmi exercism_rails
 
-.PHONY: all detatched detatched_init production_init setup_db migrate update_repos update init run run_detatched run_production console log_development test stop clean
+.PHONY: all detached detached_init production_init setup_db migrate update_repos update init run run_detached run_production console log_development test stop clean
