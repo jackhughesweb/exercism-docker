@@ -15,7 +15,7 @@ $ make init # One-time initialization run while the server is up (database migra
 
 Future runs:
 ```
-$ make # starts the server
+$ make # starts the server (OR `make production`)
 ```
 
 Other useful commands (these should be run in a new shell while the server is up):
