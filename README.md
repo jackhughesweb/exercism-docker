@@ -9,7 +9,7 @@ First run:
 ```
 $ git clone https://github.com/jackhughesweb/exercism-docker.git # Download this repo
 $ cd exercism-docker # Change directory
-$ make # Builds and starts the server
+$ make # Builds and starts the server (OR `make production`)
 $ make init # One-time initialization run while the server is up (database migration and seed) - run in a new shell while the server is up
 ```
 
